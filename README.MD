@@ -22,7 +22,7 @@ Then create the files of enviroment variables.
     $ mkdir .envs && mkdir .envs/.local && touch .envs/.local/.django && touch .envs/.local/.postgres
 
 Now add the enviroment variables.
-In .django add
+In .envs/.local/.django add
 
     DEBUG=1
     SECRET_KEY=django-insecure-8+dqxk)mv*gz7-sw4ly@h2(%$kt@u8hxrhprc!-lr&c@!hp0ab
@@ -42,7 +42,7 @@ In .django add
     CELERY_FLOWER_USER=sjYeRSvzPyXsLEoPerLkImHuUCxSJvGL
     CELERY_FLOWER_PASSWORD=4RvvZ05xkCtOTSbw7jfbYWCgiR6ja8zWc0a8FiRq7OmJyuCJVe1N6X4pa1CiLJD8
 
-In .postgres add:
+In .envs/.local/.postgres add:
 
     # PostgreSQL
     # ------------------------------------------------------------------------------
