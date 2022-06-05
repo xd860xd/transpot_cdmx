@@ -19,7 +19,7 @@ First clone this repo and go to the project root.
 
 Then create the files of enviroment variables.
 
-    $ mkdir .envs && mkdir .envs/.production && touch .envs/.production/.django && touch .envs/.production/.postgres
+    $ mkdir .envs && mkdir .envs/.local && touch .envs/.local/.django && touch .envs/.local/.postgres
 
 Now add the enviroment variables.
 In .django add
