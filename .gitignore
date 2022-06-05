@@ -285,3 +285,4 @@ fyg_tickets/media/
 
 .vscode
 .vscode/
+.envs/

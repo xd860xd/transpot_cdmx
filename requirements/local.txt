@@ -1,0 +1,23 @@
+Django==3.2.6
+djangorestframework==3.12.4
+django-cors-headers==3.8.0
+psycopg2==2.9.1
+gunicorn==20.1.0
+django-filter==2.4.0
+geopy==2.2.0
+requests==2.27.1
+djangorestframework-simplejwt==5.1.0  # https://github.com/SimpleJWT/django-rest-framework-simplejwt
+
+django-environ==0.8.1  # https://github.com/joke2k/django-environ
+
+pytz==2021.3  # https://github.com/stub42/pytz
+python-slugify==6.1.2  # https://github.com/un33k/python-slugify
+Pillow==9.1.0  # https://github.com/python-pillow/Pillow
+argon2-cffi==21.3.0  # https://github.com/hynek/argon2_cffi
+redis==4.2.2  # https://github.com/redis/redis-py
+hiredis==2.0.0  # https://github.com/redis/hiredis-py
+celery==5.2.6  # pyup: < 6.0  # https://github.com/celery/celery
+django-celery-beat==2.2.1  # https://github.com/celery/django-celery-beat
+flower==1.0.0  # https://github.com/mher/flower
+django-extensions==3.1.5  # https://github.com/django-extensions/django-extensions
+pre-commit==2.18.1  # https://github.com/pre-commit/pre-commit

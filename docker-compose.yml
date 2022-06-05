@@ -1,0 +1,100 @@
+version: "3.7"
+
+volumes:
+  transports_cdmx_local_postgres_data: {}
+  transports_cdmx_local_postgres_data_backups: {}
+
+networks:
+  transports_cdmx_network_local:
+    name: transports_cdmx_network_local
+    driver: bridge
+    ipam:
+      driver: default
+
+services:
+  django: &django
+    build:
+      context: .
+      dockerfile: ./compose/local/django/Dockerfile
+    image: transports_cdmx_local_django
+    container_name: transports_cdmx_local_django
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app:z
+    env_file:
+      - ./.envs/.local/.django
+      - ./.envs/.local/.postgres
+    ports:
+      - "8000:8000"
+    command: /start
+    networks:
+      transports_cdmx_network_local:
+        aliases:
+          - django
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/local/postgres/Dockerfile
+    image: transports_cdmx_local_postgres
+    container_name: transports_cdmx_local_postgres
+    volumes:
+      - transports_cdmx_local_postgres_data:/var/lib/postgresql/data:Z
+      - transports_cdmx_local_postgres_data_backups:/backups/local:z
+    env_file:
+      - ./.envs/.local/.postgres
+    ports:
+      - "5470:5432"
+    networks:
+      transports_cdmx_network_local:
+        aliases:
+          - postgres
+
+  redis:
+    image: redis:6
+    container_name: transports_cdmx_local_redis
+    networks:
+      transports_cdmx_network_local:
+        aliases:
+          - redis
+
+  celeryworker:
+    <<: *django
+    image: transports_cdmx_local_celeryworker
+    container_name: transports_cdmx_local_celeryworker
+    depends_on:
+      - redis
+      - postgres
+    ports: []
+    command: /start-celeryworker
+    networks:
+      transports_cdmx_network_local:
+        aliases:
+          - celeryworker
+
+  celerybeat:
+    <<: *django
+    image: transports_cdmx_local_celerybeat
+    container_name: transports_cdmx_local_celerybeat
+    depends_on:
+      - redis
+      - postgres
+    ports: []
+    command: /start-celerybeat
+    networks:
+      transports_cdmx_network_local:
+        aliases:
+          - celerybeat
+
+  flower:
+    <<: *django
+    image: transports_cdmx_local_flower
+    container_name: transports_cdmx_local_flower
+    ports:
+      - "5570:5555"
+    command: /start-flower
+    networks:
+      transports_cdmx_network_local:
+        aliases:
+          - flower
